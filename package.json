@@ -7,7 +7,7 @@
     "z0": "./bin/cli.js"
   },
   "scripts": {
-    "start": "./bin/cli.js ../examples/init"
+    "start": "./bin/cli.js examples --library glamorous"
   },
   "keywords": [],
   "author": "Brent Jackson",
@@ -20,11 +20,13 @@
     "gray-matter": "^3.1.1",
     "load-json-file": "^4.0.0",
     "meow": "^4.0.0",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "read-pkg": "^3.0.0",
     "remark": "^8.0.0",
     "remark-react": "^4.0.1",
+    "remark-slug": "^4.2.3",
     "styled-components": "^2.2.4",
     "styled-system": "^1.0.8"
   }

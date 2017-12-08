@@ -24,18 +24,18 @@ const cli = meow(`
 })
 
 const [ dirname ] = cli.input
+const opts = Object.assign({}, cli.flags)
 
 const create = async dirname => {
-  const data = await getData(dirname)
-  const pages = await render(data)
+  const data = await getData(dirname, opts)
+  const pages = await render(data, opts)
   // const result = await writePages(pages)
   return pages
 }
 
 create(dirname)
   .then(result => {
-    // console.log('exported', result)
-    console.log('exported')
+    console.log('exported', result)
   })
   .catch(err => {
     console.log(err)
