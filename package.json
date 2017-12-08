@@ -1,0 +1,31 @@
+{
+  "name": "z0",
+  "version": "1.0.0-0",
+  "description": "Compositor JSX site generator",
+  "main": "lib/index.js",
+  "bin": {
+    "z0": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "./bin/cli.js ../examples/init"
+  },
+  "keywords": [],
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "dependencies": {
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-standalone": "^6.26.0",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.11.0",
+    "gray-matter": "^3.1.1",
+    "load-json-file": "^4.0.0",
+    "meow": "^4.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "read-pkg": "^3.0.0",
+    "remark": "^8.0.0",
+    "remark-react": "^4.0.1",
+    "styled-components": "^2.2.4",
+    "styled-system": "^1.0.8"
+  }
+}
