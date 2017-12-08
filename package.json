@@ -9,8 +9,7 @@
   "scripts": {
     "start": "./bin/cli.js examples --out-dir .site"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
@@ -29,6 +28,6 @@
     "remark-react": "^4.0.1",
     "remark-slug": "^4.2.3",
     "styled-components": "^2.2.4",
-    "styled-system": "^1.0.8"
+    "styled-system": "^1.1.0"
   }
 }

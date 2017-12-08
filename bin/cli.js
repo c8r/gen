@@ -24,7 +24,9 @@ const cli = meow(`
   }
 })
 
-const [ dirname ] = cli.input
+const [
+  dirname = process.cwd()
+] = cli.input
 const opts = Object.assign({}, cli.flags, {
   outDir: path.join(process.cwd(), cli.flags.outDir || '')
 })
@@ -38,7 +40,7 @@ const create = async dirname => {
 
 create(dirname)
   .then(result => {
-    console.log('exported')
+    console.log('exported files')
   })
   .catch(err => {
     console.log(err)
