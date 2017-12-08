@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
+const path = require('path')
 const meow = require('meow')
 
 const {
   getData,
   render,
+  writePages,
 } = require('../lib')
 
 const cli = meow(`
@@ -13,7 +15,6 @@ const cli = meow(`
 
   Options:
     --out-dir, -d    Output directory
-    --dev
 `, {
   flags: {
     outDir: {
@@ -24,18 +25,20 @@ const cli = meow(`
 })
 
 const [ dirname ] = cli.input
-const opts = Object.assign({}, cli.flags)
+const opts = Object.assign({}, cli.flags, {
+  outDir: path.join(process.cwd(), cli.flags.outDir || '')
+})
 
 const create = async dirname => {
   const data = await getData(dirname, opts)
   const pages = await render(data, opts)
-  // const result = await writePages(pages)
-  return pages
+  const result = await writePages(pages, opts)
+  return result
 }
 
 create(dirname)
   .then(result => {
-    console.log('exported', result)
+    console.log('exported')
   })
   .catch(err => {
     console.log(err)

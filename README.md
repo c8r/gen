@@ -1,18 +1,27 @@
 
-# z0
+# gen
 
-Compositor JSX site generator
+Compositor JSX static site generator
 
+```sh
+npm i @compositor/gen
+```
 
-- export static HTML
-- multiple routes
-- styled-components or glamorous or cxs
-- create library
-- markdown
-- fm.layout
+```sh
+gen . --out-dir dist
+```
+
+- Exports static HTML
+- Handles multiple routes
+- Export to styled-components, glamorous, and more
+- Use Lab components in markdown
+- Pass data via front-matter
+
+[Made by Compositor](https://compositor.io/)
+|
+[MIT License](LICENSE.md)
+
+<!--
 - dev server (based on z0-lite)
-- front-matter to HTML head
-  - title
-  - description
-  - stylesheets
-- z0.config.js (get data)
+- gen.config.js (get data)
+-->

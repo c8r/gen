@@ -1,15 +1,16 @@
 {
-  "name": "z0",
+  "name": "@compositor/gen",
   "version": "1.0.0-0",
-  "description": "Compositor JSX site generator",
+  "description": "Compositor JSX static site generator",
   "main": "lib/index.js",
   "bin": {
-    "z0": "./bin/cli.js"
+    "gen": "./bin/cli.js"
   },
   "scripts": {
-    "start": "./bin/cli.js examples --library glamorous"
+    "start": "./bin/cli.js examples --out-dir .site"
   },
-  "keywords": [],
+  "keywords": [
+  ],
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
