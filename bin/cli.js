@@ -3,6 +3,10 @@
 const path = require('path')
 const meow = require('meow')
 const open = require('opn')
+const chalk = require('chalk')
+
+const pkg = require('../package.json')
+require('update-notifier')({ pkg }).notify()
 
 const {
   getData,
@@ -10,6 +14,13 @@ const {
   writePages,
   server,
 } = require('../lib')
+
+const log = (...msgs) => {
+  console.log(
+    chalk.black.bgCyan(' gen '),
+    chalk.cyan(...msgs)
+  )
+}
 
 const cli = meow(`
   Usage:
@@ -55,27 +66,30 @@ const create = async dirname => {
   return result
 }
 
+log('@compositor/gen')
+
 if (opts.dev) {
+  log('starting dev server')
   server(dirname, opts)
     .then(srv => {
       const { port } = srv.address() || {}
-      console.log(`listening on port: ${port}`)
+      log(`listening on port: ${port}`)
       const url = `http://localhost:${port}`
       if (opts.open) {
         open(url)
       }
     })
     .catch(err => {
-      console.log(err)
+      log('error', err)
       process.exit(1)
     })
 } else {
   create(dirname)
     .then(result => {
-      console.log('exported files')
+      log('files saved to', dirname)
     })
     .catch(err => {
-      console.log(err)
+      log('error', err)
       process.exit(1)
     })
 }

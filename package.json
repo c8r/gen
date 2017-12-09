@@ -24,6 +24,7 @@
     "@compositor/webfont": "^1.0.0-1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-standalone": "^6.26.0",
+    "chalk": "^2.3.0",
     "chokidar": "^1.7.0",
     "dot-prop": "^4.2.0",
     "glamor": "^2.20.40",
@@ -42,6 +43,7 @@
     "remark-slug": "^4.2.3",
     "styled-components": "^2.2.4",
     "styled-system": "^1.1.0",
+    "update-notifier": "^2.3.0",
     "ws": "^3.3.2"
   },
   "devDependencies": {
