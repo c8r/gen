@@ -4,6 +4,7 @@ const path = require('path')
 const meow = require('meow')
 const open = require('opn')
 const chalk = require('chalk')
+const readPkgUp = require('read-pkg-up')
 
 const pkg = require('../package.json')
 require('update-notifier')({ pkg }).notify()
@@ -55,7 +56,8 @@ const cli = meow(`
 const [
   dirname = process.cwd()
 ] = cli.input
-const opts = Object.assign({}, cli.flags, {
+const userPkg = readPkgUp.sync(dirname) || {}
+const opts = Object.assign({}, userPkg.gen, cli.flags, {
   outDir: path.join(process.cwd(), cli.flags.outDir || '')
 })
 
