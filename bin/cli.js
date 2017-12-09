@@ -13,11 +13,12 @@ const {
 
 const cli = meow(`
   Usage:
-    $ z0 dirname
+    $ gen dirname
 
   Options:
     --out-dir, -d   Output directory
     --dev, -D       Start development server
+    --port, -p      Set port for development server
     --open, -o      Open development server in default browser
 `, {
   flags: {
@@ -28,6 +29,10 @@ const cli = meow(`
     dev: {
       type: 'boolean',
       alias: 'D'
+    },
+    port: {
+      type: 'string',
+      alias: 'p'
     },
     open: {
       type: 'boolean',

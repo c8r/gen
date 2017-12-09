@@ -8,9 +8,15 @@
   },
   "scripts": {
     "test": "./bin/cli.js examples --out-dir .site",
-    "start": "./bin/cli.js examples -Do"
+    "start": "./bin/cli.js examples -Do --port 9000"
   },
-  "keywords": [],
+  "keywords": [
+    "compositor",
+    "static-site",
+    "JSX",
+    "markdown",
+    "React"
+  ],
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
