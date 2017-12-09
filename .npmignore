@@ -1,3 +1,5 @@
 .site
 .nyc_output
 coverage
+test.js*
+examples

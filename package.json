@@ -7,8 +7,9 @@
     "gen": "./bin/cli.js"
   },
   "scripts": {
-    "test": "./bin/cli.js examples --out-dir .site",
-    "start": "./bin/cli.js examples -Do --port 9000"
+    "build": "./bin/cli.js examples --out-dir .site",
+    "start": "./bin/cli.js examples -Do --port 9000",
+    "test": "nyc ava"
   },
   "keywords": [
     "compositor",
@@ -42,5 +43,9 @@
     "styled-components": "^2.2.4",
     "styled-system": "^1.1.0",
     "ws": "^3.3.2"
+  },
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "nyc": "^11.3.0"
   }
 }
