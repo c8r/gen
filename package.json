@@ -7,7 +7,8 @@
     "gen": "./bin/cli.js"
   },
   "scripts": {
-    "start": "./bin/cli.js examples --out-dir .site"
+    "test": "./bin/cli.js examples --out-dir .site",
+    "start": "./bin/cli.js examples -Do"
   },
   "keywords": [],
   "author": "Brent Jackson",
@@ -16,12 +17,15 @@
     "@compositor/webfont": "^1.0.0-1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-standalone": "^6.26.0",
+    "chokidar": "^1.7.0",
     "dot-prop": "^4.2.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.11.0",
     "gray-matter": "^3.1.1",
     "load-json-file": "^4.0.0",
     "meow": "^4.0.0",
+    "opn": "^5.1.0",
+    "portfinder": "^1.0.13",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -30,6 +34,7 @@
     "remark-react": "^4.0.1",
     "remark-slug": "^4.2.3",
     "styled-components": "^2.2.4",
-    "styled-system": "^1.1.0"
+    "styled-system": "^1.1.0",
+    "ws": "^3.3.2"
   }
 }

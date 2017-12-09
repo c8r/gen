@@ -2,11 +2,13 @@
 
 const path = require('path')
 const meow = require('meow')
+const open = require('opn')
 
 const {
   getData,
   render,
   writePages,
+  server,
 } = require('../lib')
 
 const cli = meow(`
@@ -14,12 +16,22 @@ const cli = meow(`
     $ z0 dirname
 
   Options:
-    --out-dir, -d    Output directory
+    --out-dir, -d   Output directory
+    --dev, -D       Start development server
+    --open, -o      Open development server in default browser
 `, {
   flags: {
     outDir: {
       type: 'string',
       alias: 'd'
+    },
+    dev: {
+      type: 'boolean',
+      alias: 'D'
+    },
+    open: {
+      type: 'boolean',
+      alias: 'o'
     }
   }
 })
@@ -38,11 +50,27 @@ const create = async dirname => {
   return result
 }
 
-create(dirname)
-  .then(result => {
-    console.log('exported files')
-  })
-  .catch(err => {
-    console.log(err)
-    process.exit(1)
-  })
+if (opts.dev) {
+  server(dirname, opts)
+    .then(srv => {
+      const { port } = srv.address() || {}
+      console.log(`listening on port: ${port}`)
+      const url = `http://localhost:${port}`
+      if (opts.open) {
+        open(url)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      process.exit(1)
+    })
+} else {
+  create(dirname)
+    .then(result => {
+      console.log('exported files')
+    })
+    .catch(err => {
+      console.log(err)
+      process.exit(1)
+    })
+}
