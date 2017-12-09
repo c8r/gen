@@ -50,5 +50,14 @@
   "devDependencies": {
     "ava": "^0.24.0",
     "nyc": "^11.3.0"
+  },
+  "gen": {
+    "title": "Gen",
+    "markdownProps": {
+      "h1": {
+        "mt": 5,
+        "color": "tomato"
+      }
+    }
   }
 }

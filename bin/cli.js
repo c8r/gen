@@ -5,6 +5,7 @@ const meow = require('meow')
 const open = require('opn')
 const chalk = require('chalk')
 const readPkgUp = require('read-pkg-up')
+const dot = require('dot-prop')
 
 const pkg = require('../package.json')
 require('update-notifier')({ pkg }).notify()
@@ -57,11 +58,11 @@ const [
   dirname = process.cwd()
 ] = cli.input
 const userPkg = readPkgUp.sync(dirname) || {}
-const opts = Object.assign({}, userPkg.gen, cli.flags, {
+const opts = Object.assign({}, dot.get(userPkg, 'pkg.gen'), cli.flags, {
   outDir: path.join(process.cwd(), cli.flags.outDir || '')
 })
 
-const create = async dirname => {
+const create = async (dirname, opts) => {
   const data = await getData(dirname, opts)
   const pages = await render(data, opts)
   const result = await writePages(pages, opts)
@@ -86,7 +87,7 @@ if (opts.dev) {
       process.exit(1)
     })
 } else {
-  create(dirname)
+  create(dirname, opts)
     .then(result => {
       log('files saved to', dirname)
     })
