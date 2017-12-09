@@ -13,8 +13,10 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
+    "@compositor/webfont": "^1.0.0-1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-standalone": "^6.26.0",
+    "dot-prop": "^4.2.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.11.0",
     "gray-matter": "^3.1.1",
