@@ -28,6 +28,28 @@ Run in development mode:
 gen . --dev
 ```
 
+### How it works
+
+Given a folder structure like the following:
+
+```
+dist/
+src/
+  about.jsx
+  index.jsx
+  lab.json
+  theme.json
+```
+
+Running `gen src --out-dir dist` will create the following:
+
+```
+dist/
+  about/
+    index.html
+  index.html
+```
+
 ### CLI options
 
 - `--out-dir`, `-d`: output directory
@@ -43,9 +65,44 @@ Markdown and JSX files can include [front-matter][front-matter] for setting page
 
 ### Front Matter Options
 
+All front matter is passed to the JSX file as a `props` object.
+Additionally, page-level metadata can be set using the following properties:
+
 - `title` page title
 - `description` page description
+- `og` object of open graph data
+- `twitter` object of Twitter card data
+- `stylesheets` array of stylesheet URLs to add as links in the head
+- `scripts` array of JavaScript strings to include before the closing body tag
 
+### Layouts
+
+When rendering markdown files, Gen will look for a `layout` property in front-matter. If a JSX file with the same name is found, it will be used as a page layout component, passing the rendered markdown content as children.
+
+**Example markdown file**
+
+```md
+---
+title: About
+layout: default-layout
+---
+
+# About
+```
+
+**Example JSX layout file**
+
+```jsx
+---
+---
+<SiteHeader />
+<Box px={3} py={4}>
+  {props.children}
+</Box>
+<SiteFooter />
+```
+
+---
 
 [Made by Compositor](https://compositor.io/)
 |
