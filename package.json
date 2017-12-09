@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "./bin/cli.js examples --out-dir .site",
-    "start": "./bin/cli.js examples -Do --port 9000",
+    "start": "./bin/cli.js examples -Do --port 9000 --library glamorous",
     "test": "nyc ava"
   },
   "keywords": [
