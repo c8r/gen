@@ -3,5 +3,6 @@
     "'Roboto Mono', monospace"
   ],
   "lineHeight": 1.625,
-  "textColor": "#033"
+  "textColor": "#033",
+  "xtextColor": "tomato"
 }
