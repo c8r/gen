@@ -1,6 +1,6 @@
 {
   "name": "@compositor/gen",
-  "version": "1.0.0-4",
+  "version": "1.0.0-4-electron",
   "description": "Compositor JSX static site generator",
   "main": "lib/index.js",
   "bin": {
