@@ -27,6 +27,7 @@
     "chalk": "^2.3.0",
     "chokidar": "^1.7.0",
     "dot-prop": "^4.2.0",
+    "es6-promisify": "^5.0.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.11.0",
     "gray-matter": "^3.1.1",
