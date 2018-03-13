@@ -12,11 +12,13 @@ twitter:
 
 This markdown file doesn't specify a layout, so it gets a simple default one.
 
+## Table of Contents
+
 ## H2
 
 Hello there little markdown file.
 
-## H3
+### H3
 
 How are you doing this fine evening
 
