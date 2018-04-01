@@ -89,8 +89,10 @@ if (options.outDir) {
   dev(dirname, options)
     .then(server => {
       const { port } = server.listeningApp.address()
+      const url = `http://localhost:${port}`
+      log(`listening on ${url}`)
       if (options.open) {
-        open(`http://localhost:${port}`)
+        open(url)
       }
     })
     .catch(err => {
