@@ -4,15 +4,17 @@
 Compositor JSX static site generator
 
 ```sh
-npm i @compositor/gen -g
+npm install --save-dev @compositor/gen
 ```
 
-- Build static sites with [Lab][lab] components and [Iso][iso] JSX files
+- Build static sites with JSX and [MDX][mdx] files
 - Exports static HTML and inlined CSS
 - Handles multiple routes
 - Export CSS using styled-components, glamorous, and more
 - Use Lab components and themes in markdown
 - Pass props data via front-matter
+
+[mdx]: https://github.com/mdx-js/mdx
 
 ## Usage
 
@@ -25,7 +27,7 @@ gen . --out-dir dist
 Run in development mode:
 
 ```sh
-gen . --dev
+gen .
 ```
 
 ### How it works
@@ -37,8 +39,7 @@ dist/
 src/
   about.jsx
   index.jsx
-  lab.json
-  theme.json
+  hello.mdx
 ```
 
 Running `gen src --out-dir dist` will create HTML files:
@@ -47,15 +48,12 @@ Running `gen src --out-dir dist` will create HTML files:
 dist/
   about/
     index.html
+  hello/
+    index.html
   index.html
 ```
 
-### Files
-
-Gen will load `theme.json` and `lab.json` files in the target directory and import Lab components.
-Any files ending with `.jsx` or `.md` will be used to create pages.
-Markdown and JSX files can include [front-matter][front-matter] for setting page-level attributes,
-such as title and description, and also be passed to the page component as props.
+### JSX
 
 **Example JSX file**
 
@@ -86,14 +84,14 @@ Additionally, page-level metadata can be set using the following properties:
 
 ### Layouts
 
-When rendering markdown files, Gen will look for a `layout` property in front-matter. If a JSX file with the same name is found, it will be used as a page layout component, passing the rendered markdown content as children.
+Gen will look for a `layout` prop in front-matter. If a JSX file with the same name is found, it will be used as a page layout component, passing the rendered content as children.
 
-**Example markdown file**
+**Example mdx file**
 
 ```md
 ---
 title: About
-layout: default-layout
+layout: layout
 ---
 
 # About
@@ -111,10 +109,35 @@ layout: default-layout
 <SiteFooter />
 ```
 
+### Configuration
+
+Use the `--config` flag to pass a config file to the renderer.
+A config file can specify a `components` object to add components to scope and a `theme` object to be passed to styled-components [ThemeProvider][theme-provider]
+
+[theme-provider]: https://www.styled-components.com/docs/advanced#theming
+
+**Example config.js file**
+
+```js
+import { Box, Flex, Heading } from 'rebass'
+
+export default {
+  components: {
+    Box,
+    Flex,
+    Heading
+  },
+  theme: {
+    colors: {
+      blue: '#0af'
+    }
+  }
+}
+```
+
 ### CLI options
 
 - `--out-dir`, `-d`: output directory
-- `--dev`, `-D`: run as development server
 - `--open`, `-o`: open development server in default browser
 - `--port`, `-p`: set port for development server
 
@@ -124,11 +147,6 @@ layout: default-layout
 |
 [MIT License](LICENSE.md)
 
-[lab]: https://compositor.io/lab/
 [iso]: https://compositor.io/iso/
 [front-matter]: https://jekyllrb.com/docs/frontmatter/
-[open-formats]: https://compositor.io/blog/open-formats/
 
-<!--
-- gen.config.js (get data)
--->

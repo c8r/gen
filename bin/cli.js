@@ -1,47 +1,36 @@
 #!/usr/bin/env node
-
 const path = require('path')
 const meow = require('meow')
-const open = require('opn')
+const { pkg } = require('read-pkg-up').sync()
+const open = require('react-dev-utils/openBrowser')
 const chalk = require('chalk')
-const readPkgUp = require('read-pkg-up')
-const dot = require('dot-prop')
 
-const pkg = require('../package.json')
-require('update-notifier')({ pkg }).notify()
-
-const {
-  getData,
-  render,
-  writePages,
-  server,
-} = require('../lib')
-
-const log = (...msgs) => {
-  console.log(
-    chalk.black.bgCyan(' gen '),
-    chalk.cyan(...msgs)
-  )
-}
+require('update-notifier')({
+  pkg: require('../package.json')
+}).notify()
 
 const cli = meow(`
   Usage:
+
     $ gen dirname
 
   Options:
-    --out-dir, -d   Output directory
-    --dev, -D       Start development server
-    --port, -p      Set port for development server
-    --open, -o      Open development server in default browser
+
+    -c --config   Path to config file
+
+    -p --port     Port for dev server
+
+    -o --open     Open server in default browser
+
+    --static      Build to static HTML
+
+    -d --out-dir  Output directory for static build
+
 `, {
   flags: {
-    outDir: {
+    config: {
       type: 'string',
-      alias: 'd'
-    },
-    dev: {
-      type: 'boolean',
-      alias: 'D'
+      alias: 'c'
     },
     port: {
       type: 'string',
@@ -50,49 +39,62 @@ const cli = meow(`
     open: {
       type: 'boolean',
       alias: 'o'
+    },
+    outDir: {
+      type: 'string',
+      alias: 'd'
     }
   }
 })
 
-const [
-  dirname = process.cwd()
-] = cli.input
-const userPkg = readPkgUp.sync(dirname) || {}
-const opts = Object.assign({}, dot.get(userPkg, 'pkg.gen'), cli.flags, {
-  outDir: path.join(process.cwd(), cli.flags.outDir || '')
-})
+const [ dir ] = cli.input
+const options = Object.assign({},
+  pkg.gen,
+  cli.flags
+)
 
-const create = async (dirname, opts) => {
-  const data = await getData(dirname, opts)
-  const pages = await render(data, opts)
-  const result = await writePages(pages, opts)
-  return result
+if (options.outDir) {
+  options.outDir = path.isAbsolute(options.outDir)
+    ? options.outDir
+    : path.join(process.cwd(), options.outDir)
+}
+
+const dirname = path.isAbsolute(dir)
+  ? dir
+  : path.join(process.cwd(), dir)
+
+const log = (...msgs) => {
+  console.log(
+    chalk.black.bgCyan(' gen '),
+    chalk.cyan(...msgs)
+  )
 }
 
 log('@compositor/gen')
 
-if (opts.dev) {
-  log('starting dev server')
-  server(dirname, opts)
-    .then(srv => {
-      const { port } = srv.address() || {}
-      log(`listening on port: ${port}`)
-      const url = `http://localhost:${port}`
-      if (opts.open) {
-        open(url)
-      }
+const { dev, build } = require('../lib')
+
+if (options.static) {
+  log('building static site')
+  build(dirname, options)
+    .then(res => {
+      console.log(res)
+      log('static site saved to ' + dirname)
     })
     .catch(err => {
-      log('error', err)
+      console.log(err)
       process.exit(1)
     })
 } else {
-  create(dirname, opts)
-    .then(result => {
-      log('files saved to', dirname)
+  dev(dirname, options)
+    .then(server => {
+      const { port } = server.listeningApp.address()
+      if (options.open) {
+        open(`http://localhost:${port}`)
+      }
     })
     .catch(err => {
-      log('error', err)
+      console.log(err)
       process.exit(1)
     })
 }

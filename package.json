@@ -1,14 +1,14 @@
 {
   "name": "@compositor/gen",
-  "version": "1.0.0-4",
-  "description": "Compositor JSX static site generator",
-  "main": "lib/index.js",
+  "version": "2.0.0-0",
+  "description": "Compositor JSX & MDX static site generator",
+  "main": "index.js",
   "bin": {
     "gen": "./bin/cli.js"
   },
   "scripts": {
-    "build": "./bin/cli.js examples --out-dir .site",
-    "start": "./bin/cli.js examples -Do --port 9000 --library glamorous",
+    "build": "./bin/cli.js examples -c examples/config.js --out-dir .site",
+    "start": "./bin/cli.js examples -oc examples/config.js",
     "test": "nyc ava"
   },
   "keywords": [
@@ -21,43 +21,34 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
-    "@compositor/webfont": "^1.0.0-1",
+    "@mdx-js/mdx": "^0.5.0",
+    "@mdx-js/tag": "^0.4.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-standalone": "^6.26.0",
-    "chalk": "^2.3.0",
-    "chokidar": "^1.7.0",
-    "dot-prop": "^4.2.0",
-    "glamor": "^2.20.40",
-    "glamorous": "^4.11.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chalk": "^2.3.2",
     "gray-matter": "^3.1.1",
-    "load-json-file": "^4.0.0",
+    "loader-utils": "^1.1.0",
     "meow": "^4.0.0",
-    "opn": "^5.1.0",
-    "portfinder": "^1.0.13",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "read-pkg": "^3.0.0",
+    "react": "^16.3.0",
+    "react-dev-utils": "^5.0.0",
+    "react-dom": "^16.3.0",
+    "react-router-dom": "^4.2.2",
     "read-pkg-up": "^3.0.0",
-    "remark": "^8.0.0",
-    "remark-react": "^4.0.1",
-    "remark-slug": "^4.2.3",
-    "styled-components": "^2.2.4",
-    "styled-system": "^1.1.0",
-    "update-notifier": "^2.3.0",
-    "ws": "^3.3.2"
+    "stringify-object": "^3.2.2",
+    "styled-components": "^3.2.5",
+    "styled-system": "^2.2.1",
+    "update-notifier": "^2.4.0",
+    "webpack": "^4.4.1",
+    "webpack-dev-server": "^3.1.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
     "ava": "^0.24.0",
     "nyc": "^11.3.0"
-  },
-  "gen": {
-    "title": "Gen",
-    "markdownProps": {
-      "h1": {
-        "mt": 5,
-        "color": "tomato"
-      }
-    }
   }
 }
