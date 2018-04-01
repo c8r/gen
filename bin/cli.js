@@ -22,7 +22,7 @@ const cli = meow(`
 
     -o --open     Open server in default browser
 
-    --static      Build to static HTML
+    --static      Build to static HTML without client-side bundle.js
 
     -d --out-dir  Output directory for static build
 
@@ -74,7 +74,7 @@ log('@compositor/gen')
 
 const { dev, build } = require('../lib')
 
-if (options.static) {
+if (options.outDir) {
   log('building static site')
   build(dirname, options)
     .then(res => {
